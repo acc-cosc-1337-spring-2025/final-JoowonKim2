@@ -11,7 +11,7 @@ TEST_CASE("Verify Test Configuration", "verification") {
 	REQUIRE(true == true);
 }
 
-TEST_CASE("Die roll returns values from 1 to 6") 
+TEST_CASE("Test Die") 
 {
     Die die;
 
@@ -25,9 +25,22 @@ TEST_CASE("Die roll returns values from 1 to 6")
 TEST_CASE("Test Roll"){
     Die die1, die2;
     Roll rolls(die1, die2);
+    
     for(int i; i <= 10; i++){
         rolls.roll_dice();
         REQUIRE(rolls.roll_value() >= 2);
         REQUIRE(rolls.roll_value() <= 12);
+    }
+}
+
+TEST_CASE("Test Shooter"){
+    Die die1, die2;
+    Shooter shooter;
+
+    for (int i = 0; i < 10; ++i) {
+        Roll* roll = shooter.throw_dice(die1, die2);
+        int result = roll->roll_value();
+        REQUIRE(result >= 2);
+        REQUIRE(result <= 12);
     }
 }
